@@ -2446,7 +2446,9 @@ img {
 }
 
 .brand-origin-logo img {
-  width: min(100%, 520px);
+  width: min(100%, 340px);
+  max-height: 680px;
+  object-fit: contain;
   margin: 0 auto;
   border: 1px solid rgba(245, 241, 233, 0.2);
 }
@@ -2478,6 +2480,7 @@ img {
   .home-logo-card { display: none; }
   .home-story-photo, .editorial-photo-section > img, .story-page-photo { min-height: 470px; }
   .home-story-copy, .editorial-photo-section > div, .story-page-intro, .brand-origin-copy { padding: 74px 24px; }
+  .brand-origin-logo img { width: min(100%, 300px); max-height: 535px; }
   .story-manifesto { grid-template-columns: 1fr; gap: 52px; }
   .page-next { align-items: flex-start; flex-direction: column; justify-content: center; }
   .page-next a { width: 100%; justify-content: space-between; }
