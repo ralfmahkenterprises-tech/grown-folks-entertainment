@@ -1022,6 +1022,61 @@ img {
   line-height: 1.35;
 }
 
+.classic-player {
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(245, 241, 233, 0.22);
+}
+
+.classic-play-button {
+  width: 100%;
+  padding: 15px 18px;
+  border: 1px solid rgba(245, 241, 233, 0.72);
+  background: var(--ivory);
+  color: #111;
+  font: 700 0.68rem/1.2 var(--sans);
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.classic-play-button:hover,
+.classic-play-button:focus-visible {
+  background: #fff;
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+.classic-play-button span { margin-right: 8px; }
+
+.classic-now-playing {
+  margin: 12px 0 0;
+  color: rgba(245, 241, 233, 0.76);
+  font-size: 0.72rem;
+  line-height: 1.45;
+}
+
+.classic-player-frame {
+  margin-top: 14px;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #050607;
+}
+
+.classic-player-frame[hidden] { display: none; }
+.classic-player-frame iframe { width: 100%; height: 100%; border: 0; }
+
+.classic-youtube-link {
+  display: inline-block;
+  margin-top: 10px;
+  color: var(--ivory);
+  font-size: 0.66rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.classic-youtube-link[hidden] { display: none; }
+
 .standard-section {
   position: relative;
   width: 100%;
