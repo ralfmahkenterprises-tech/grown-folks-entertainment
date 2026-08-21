@@ -53,11 +53,7 @@
   ];
 
   const classicRnbTracks = [
-    { id: "pNj9bXKGOiI", title: "Never Too Much", artist: "Luther Vandross", year: "1981" },
-    { id: "PzpLkcfBe-A", title: "I Wanna Be Down", artist: "Brandy", year: "1994" },
-    { id: "a02dBbBGSPg", title: "Back & Forth", artist: "Aaliyah", year: "1994" },
-    { id: "LlZydtG3xqI", title: "Creep", artist: "TLC", year: "1994" },
-    { id: "3KL9mRus19o", title: "No Diggity", artist: "Blackstreet", year: "1996" },
+    { src: "./assets/music/after-the-love-has-gone.mp3", title: "After the Love Has Gone", artist: "Earth, Wind & Fire", year: "1979" },
   ];
 
   const menuToggle = document.querySelector(".menu-toggle");
@@ -159,9 +155,8 @@
   }
 
   const randomClassicButton = document.querySelector("[data-random-classic]");
-  const playerFrame = document.querySelector("[data-player-frame]");
+  const classicAudio = document.querySelector("[data-classic-audio]");
   const nowPlaying = document.querySelector("[data-now-playing]");
-  const youtubeLink = document.querySelector("[data-youtube-link]");
   let lastTrackIndex = -1;
 
   const chooseRandomTrack = () => {
@@ -173,17 +168,16 @@
     return classicRnbTracks[nextIndex];
   };
 
-  if (randomClassicButton && playerFrame && nowPlaying && youtubeLink) {
+  if (randomClassicButton && classicAudio && nowPlaying) {
     randomClassicButton.addEventListener("click", () => {
       const track = chooseRandomTrack();
-      const watchUrl = `https://www.youtube.com/watch?v=${track.id}`;
-
-      playerFrame.hidden = false;
-      playerFrame.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${track.id}?autoplay=1&rel=0&playsinline=1" title="${track.title} by ${track.artist}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+      if (!classicAudio.currentSrc.endsWith(track.src.replace("./", "/"))) {
+        classicAudio.src = track.src;
+      }
+      classicAudio.currentTime = 0;
       nowPlaying.textContent = `Now playing: ${track.artist} — ${track.title} (${track.year})`;
-      youtubeLink.href = watchUrl;
-      youtubeLink.hidden = false;
-      randomClassicButton.innerHTML = '<span aria-hidden="true">↻</span> Play another classic';
+      classicAudio.play();
+      randomClassicButton.innerHTML = '<span aria-hidden="true">↻</span> Restart this classic';
     });
   }
 })();

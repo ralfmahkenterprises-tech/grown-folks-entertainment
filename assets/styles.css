@@ -1056,26 +1056,12 @@ img {
   line-height: 1.45;
 }
 
-.classic-player-frame {
+.classic-audio {
+  display: block;
+  width: 100%;
   margin-top: 14px;
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
-  background: #050607;
+  accent-color: var(--ivory);
 }
-
-.classic-player-frame[hidden] { display: none; }
-.classic-player-frame iframe { width: 100%; height: 100%; border: 0; }
-
-.classic-youtube-link {
-  display: inline-block;
-  margin-top: 10px;
-  color: var(--ivory);
-  font-size: 0.66rem;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-}
-
-.classic-youtube-link[hidden] { display: none; }
 
 .standard-section {
   position: relative;
