@@ -13,6 +13,7 @@
       setting: "Dinner becoming midnight",
       pulse: "Unhurried & intimate",
       promise: "Every note lands softly",
+      spotify: "5tGSuuZ27nkTJQRBQrxPET",
     },
     {
       id: "sunday-soul",
@@ -25,6 +26,7 @@
       setting: "Brunch with no end time",
       pulse: "Easy & sunlit",
       promise: "Soul without the rush",
+      spotify: "6l8Wh2hKiPX0Oeq9BKJ9Wc",
     },
     {
       id: "two-step-gold",
@@ -37,6 +39,7 @@
       setting: "Friends moving the furniture",
       pulse: "Bright & assured",
       promise: "The pocket stays deep",
+      spotify: "5BXQb1NVDjYp3DyLD27OEz",
     },
     {
       id: "midnight-drive",
@@ -49,6 +52,7 @@
       setting: "Streetlights in the rearview",
       pulse: "Deep & cinematic",
       promise: "No skip-worthy moments",
+      spotify: "07lQPm2BiK38Va8ZGzuCsD",
     },
   ];
 
@@ -103,6 +107,7 @@
     setting: document.querySelector("[data-mood-setting]"),
     pulse: document.querySelector("[data-mood-pulse]"),
     promise: document.querySelector("[data-mood-promise]"),
+    spotify: document.querySelector("[data-spotify-player]"),
   };
 
   const replayMoodAnimation = () => {
@@ -122,7 +127,7 @@
     });
   };
 
-  const selectMood = (index) => {
+  const selectMood = (index, shouldAutoplay = false) => {
     const mood = moods[index];
     if (!mood || !moodPanel) return;
 
@@ -142,6 +147,11 @@
     panelFields.setting.textContent = mood.setting;
     panelFields.pulse.textContent = mood.pulse;
     panelFields.promise.textContent = mood.promise;
+    if (panelFields.spotify) {
+      const autoplay = shouldAutoplay ? "&autoplay=1" : "";
+      panelFields.spotify.src = `https://open.spotify.com/embed/playlist/${mood.spotify}?utm_source=generator&theme=0${autoplay}`;
+      panelFields.spotify.title = `Grown Folks — ${mood.name} playlist on Spotify`;
+    }
 
     replayMoodAnimation();
   };
@@ -149,35 +159,9 @@
   if (moodPanel && moodButtons.length === moods.length) {
     moodButtons.forEach((button) => {
       button.addEventListener("click", () => {
-        selectMood(Number(button.dataset.moodIndex));
+        selectMood(Number(button.dataset.moodIndex), true);
       });
     });
   }
 
-  const randomClassicButton = document.querySelector("[data-random-classic]");
-  const classicAudio = document.querySelector("[data-classic-audio]");
-  const nowPlaying = document.querySelector("[data-now-playing]");
-  let lastTrackIndex = -1;
-
-  const chooseRandomTrack = () => {
-    let nextIndex = Math.floor(Math.random() * classicRnbTracks.length);
-    if (classicRnbTracks.length > 1 && nextIndex === lastTrackIndex) {
-      nextIndex = (nextIndex + 1) % classicRnbTracks.length;
-    }
-    lastTrackIndex = nextIndex;
-    return classicRnbTracks[nextIndex];
-  };
-
-  if (randomClassicButton && classicAudio && nowPlaying) {
-    randomClassicButton.addEventListener("click", () => {
-      const track = chooseRandomTrack();
-      if (!classicAudio.currentSrc.endsWith(track.src.replace("./", "/"))) {
-        classicAudio.src = track.src;
-      }
-      classicAudio.currentTime = 0;
-      nowPlaying.textContent = `Now playing: ${track.artist} — ${track.title} (${track.year})`;
-      classicAudio.play();
-      randomClassicButton.innerHTML = '<span aria-hidden="true">↻</span> Restart this classic';
-    });
-  }
 })();
