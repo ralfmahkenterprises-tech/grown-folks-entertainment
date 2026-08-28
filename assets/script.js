@@ -97,6 +97,9 @@
 
   const moodPanel = document.querySelector(".mood-panel");
   const moodButtons = Array.from(document.querySelectorAll(".mood-tab"));
+  const moodRecord = document.querySelector("[data-record-player]");
+  const recordState = document.querySelector("[data-record-state]");
+  const directAudio = document.querySelector("[data-direct-audio]");
 
   const panelFields = {
     count: document.querySelector("[data-mood-count]"),
@@ -107,7 +110,6 @@
     setting: document.querySelector("[data-mood-setting]"),
     pulse: document.querySelector("[data-mood-pulse]"),
     promise: document.querySelector("[data-mood-promise]"),
-    youtube: document.querySelector("[data-youtube-player]"),
   };
 
   const replayMoodAnimation = () => {
@@ -147,12 +149,6 @@
     panelFields.setting.textContent = mood.setting;
     panelFields.pulse.textContent = mood.pulse;
     panelFields.promise.textContent = mood.promise;
-    if (panelFields.youtube) {
-      const autoplay = shouldAutoplay ? "&autoplay=1" : "";
-      panelFields.youtube.src = `https://www.youtube.com/embed/videoseries?list=${mood.youtube}${autoplay}`;
-      panelFields.youtube.title = `Grown Folks — ${mood.name} playlist on YouTube Music`;
-    }
-
     replayMoodAnimation();
   };
 
@@ -162,6 +158,26 @@
         selectMood(Number(button.dataset.moodIndex), true);
       });
     });
+  }
+
+  if (moodRecord && directAudio) {
+    const updateRecordState = (isPlaying) => {
+      moodRecord.dataset.playing = String(isPlaying);
+      moodRecord.setAttribute("aria-label", `${isPlaying ? "Pause" : "Play"} ${classicRnbTracks[0].title} by ${classicRnbTracks[0].artist}`);
+      if (recordState) recordState.textContent = isPlaying ? "Pause" : "Play";
+    };
+
+    moodRecord.addEventListener("click", async () => {
+      if (directAudio.paused) {
+        try { await directAudio.play(); } catch (_error) { updateRecordState(false); }
+      } else {
+        directAudio.pause();
+      }
+    });
+    directAudio.addEventListener("play", () => updateRecordState(true));
+    directAudio.addEventListener("pause", () => updateRecordState(false));
+    directAudio.addEventListener("ended", () => updateRecordState(false));
+    updateRecordState(false);
   }
 
 })();
