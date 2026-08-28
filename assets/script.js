@@ -107,7 +107,7 @@
   const moodButtons = Array.from(document.querySelectorAll(".mood-tab"));
   const moodRecord = document.querySelector("[data-record-player]");
   const recordState = document.querySelector("[data-record-state]");
-  const directAudio = document.querySelector("[data-direct-audio]");
+  let selectedMoodIndex = 0;
 
   const panelFields = {
     count: document.querySelector("[data-mood-count]"),
@@ -142,6 +142,7 @@
   const selectMood = (index, shouldAutoplay = false) => {
     const mood = moods[index];
     if (!mood || !moodPanel) return;
+    selectedMoodIndex = index;
 
     moodButtons.forEach((button, buttonIndex) => {
       const isActive = buttonIndex === index;
@@ -164,6 +165,8 @@
       panelFields.youtube.title = `${mood.name}: ${mood.youtubeLabel} on YouTube Music`;
     }
     if (panelFields.youtubeLabel) panelFields.youtubeLabel.textContent = mood.youtubeLabel;
+    if (moodRecord) moodRecord.dataset.playing = String(shouldAutoplay);
+    if (recordState) recordState.textContent = shouldAutoplay ? "Playing" : "Play";
     replayMoodAnimation();
   };
 
@@ -175,24 +178,13 @@
     });
   }
 
-  if (moodRecord && directAudio) {
-    const updateRecordState = (isPlaying) => {
-      moodRecord.dataset.playing = String(isPlaying);
-      moodRecord.setAttribute("aria-label", `${isPlaying ? "Pause" : "Play"} ${classicRnbTracks[0].title} by ${classicRnbTracks[0].artist}`);
-      if (recordState) recordState.textContent = isPlaying ? "Pause" : "Play";
-    };
-
-    moodRecord.addEventListener("click", async () => {
-      if (directAudio.paused) {
-        try { await directAudio.play(); } catch (_error) { updateRecordState(false); }
-      } else {
-        directAudio.pause();
-      }
+  if (moodRecord) {
+    moodRecord.setAttribute("aria-label", "Play the selected mood on YouTube Music");
+    moodRecord.addEventListener("click", () => {
+      selectMood(selectedMoodIndex, true);
+      moodRecord.dataset.playing = "true";
+      if (recordState) recordState.textContent = "Playing";
     });
-    directAudio.addEventListener("play", () => updateRecordState(true));
-    directAudio.addEventListener("pause", () => updateRecordState(false));
-    directAudio.addEventListener("ended", () => updateRecordState(false));
-    updateRecordState(false);
   }
 
 })();
