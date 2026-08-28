@@ -14,6 +14,8 @@
       pulse: "Unhurried & intimate",
       promise: "Every note lands softly",
       youtube: "PLI4ctGLsZfcY",
+      youtubeEmbed: "https://www.youtube.com/embed/videoseries?list=PL508AB1A670943D2D",
+      youtubeLabel: "Quiet Storm Slow Jams",
     },
     {
       id: "sunday-soul",
@@ -27,6 +29,8 @@
       pulse: "Easy & sunlit",
       promise: "Soul without the rush",
       youtube: "PLTMn5T9QWFSU",
+      youtubeEmbed: "https://www.youtube.com/embed/videoseries?list=PLiVkY3bldIErOJzCSVmapM5g16td7nSib",
+      youtubeLabel: "Sunday Old-School Soul",
     },
     {
       id: "two-step-gold",
@@ -40,6 +44,8 @@
       pulse: "Bright & assured",
       promise: "The pocket stays deep",
       youtube: "PLBUJOqniMWJk",
+      youtubeEmbed: "https://www.youtube.com/embed/2cVWmGn3GiI",
+      youtubeLabel: "Slow 80s & 90s R&B Two-Step",
     },
     {
       id: "midnight-drive",
@@ -53,6 +59,8 @@
       pulse: "Deep & cinematic",
       promise: "No skip-worthy moments",
       youtube: "PLBwMUdvN5GpQ",
+      youtubeEmbed: "https://www.youtube.com/embed/_PWfVfCNFFA",
+      youtubeLabel: "Midnight Slow Jams",
     },
   ];
 
@@ -110,6 +118,8 @@
     setting: document.querySelector("[data-mood-setting]"),
     pulse: document.querySelector("[data-mood-pulse]"),
     promise: document.querySelector("[data-mood-promise]"),
+    youtube: document.querySelector("[data-youtube-player]"),
+    youtubeLabel: document.querySelector("[data-youtube-label]"),
   };
 
   const replayMoodAnimation = () => {
@@ -149,6 +159,11 @@
     panelFields.setting.textContent = mood.setting;
     panelFields.pulse.textContent = mood.pulse;
     panelFields.promise.textContent = mood.promise;
+    if (panelFields.youtube) {
+      panelFields.youtube.src = `${mood.youtubeEmbed}${shouldAutoplay ? (mood.youtubeEmbed.includes("?") ? "&" : "?") + "autoplay=1" : ""}`;
+      panelFields.youtube.title = `${mood.name}: ${mood.youtubeLabel} on YouTube Music`;
+    }
+    if (panelFields.youtubeLabel) panelFields.youtubeLabel.textContent = mood.youtubeLabel;
     replayMoodAnimation();
   };
 

@@ -1097,6 +1097,9 @@ img {
 .playlist-track span, .playlist-track small { color: var(--ivory-muted); font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; }
 .playlist-track strong { color: var(--ivory); font-family: var(--display); font-size: 1.2rem; font-weight: 400; }
 .playlist-track audio { display: block; width: 100%; height: 44px; }
+.youtube-mood-player { margin-top: 18px; }
+.youtube-mood-player > p { margin: 0 0 10px; color: var(--ivory-muted); font-size: 0.63rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.youtube-mood-player > p strong { color: var(--ivory); }
 
 .events-hero {
   width: var(--page);
