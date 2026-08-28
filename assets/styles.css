@@ -675,7 +675,7 @@ img {
 }
 
 .mood-section::before {
-  content: "MOOD / 01";
+  content: "MOODS";
   position: absolute;
   top: 52%;
   left: -46px;
@@ -701,7 +701,7 @@ img {
   position: relative;
   min-height: 124px;
   display: grid;
-  grid-template-columns: 38px 1fr 24px;
+  grid-template-columns: 1fr 24px;
   gap: 17px;
   align-items: center;
   padding: 20px 25px;
@@ -1106,7 +1106,9 @@ img {
   line-height: 0.82;
 }
 
-.events-hero > div > p:last-child { max-width: 620px; color: var(--ivory-muted); font-size: 1rem; line-height: 1.75; }
+.events-hero > div > p:not(.eyebrow) { max-width: 620px; color: var(--ivory-muted); font-size: 1rem; line-height: 1.75; }
+
+.events-member-button { margin-top: 28px; }
 
 .mst-clock {
   min-width: 280px;

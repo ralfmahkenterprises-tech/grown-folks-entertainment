@@ -139,7 +139,7 @@
 
     moodPanel.dataset.mood = mood.id;
     moodPanel.setAttribute("aria-label", `${mood.name} mood details`);
-    panelFields.count.textContent = `${mood.number} / 04`;
+    if (panelFields.count) panelFields.count.textContent = `${mood.number} / 04`;
     panelFields.initials.textContent = mood.initials;
     panelFields.eyebrow.textContent = mood.eyebrow;
     panelFields.name.textContent = mood.name;
