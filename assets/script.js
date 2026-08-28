@@ -13,7 +13,7 @@
       setting: "Dinner becoming midnight",
       pulse: "Unhurried & intimate",
       promise: "Every note lands softly",
-      spotify: "5tGSuuZ27nkTJQRBQrxPET",
+      youtube: "PLI4ctGLsZfcY",
     },
     {
       id: "sunday-soul",
@@ -26,7 +26,7 @@
       setting: "Brunch with no end time",
       pulse: "Easy & sunlit",
       promise: "Soul without the rush",
-      spotify: "6l8Wh2hKiPX0Oeq9BKJ9Wc",
+      youtube: "PLTMn5T9QWFSU",
     },
     {
       id: "two-step-gold",
@@ -39,7 +39,7 @@
       setting: "Friends moving the furniture",
       pulse: "Bright & assured",
       promise: "The pocket stays deep",
-      spotify: "5BXQb1NVDjYp3DyLD27OEz",
+      youtube: "PLBUJOqniMWJk",
     },
     {
       id: "midnight-drive",
@@ -52,7 +52,7 @@
       setting: "Streetlights in the rearview",
       pulse: "Deep & cinematic",
       promise: "No skip-worthy moments",
-      spotify: "07lQPm2BiK38Va8ZGzuCsD",
+      youtube: "PLBwMUdvN5GpQ",
     },
   ];
 
@@ -107,7 +107,7 @@
     setting: document.querySelector("[data-mood-setting]"),
     pulse: document.querySelector("[data-mood-pulse]"),
     promise: document.querySelector("[data-mood-promise]"),
-    spotify: document.querySelector("[data-spotify-player]"),
+    youtube: document.querySelector("[data-youtube-player]"),
   };
 
   const replayMoodAnimation = () => {
@@ -147,10 +147,10 @@
     panelFields.setting.textContent = mood.setting;
     panelFields.pulse.textContent = mood.pulse;
     panelFields.promise.textContent = mood.promise;
-    if (panelFields.spotify) {
+    if (panelFields.youtube) {
       const autoplay = shouldAutoplay ? "&autoplay=1" : "";
-      panelFields.spotify.src = `https://open.spotify.com/embed/playlist/${mood.spotify}?utm_source=generator&theme=0${autoplay}`;
-      panelFields.spotify.title = `Grown Folks — ${mood.name} playlist on Spotify`;
+      panelFields.youtube.src = `https://www.youtube.com/embed/videoseries?list=${mood.youtube}${autoplay}`;
+      panelFields.youtube.title = `Grown Folks — ${mood.name} playlist on YouTube Music`;
     }
 
     replayMoodAnimation();
