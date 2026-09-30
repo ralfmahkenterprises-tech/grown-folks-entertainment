@@ -1100,6 +1100,11 @@ img {
 .youtube-mood-player { margin-top: 18px; }
 .youtube-mood-player > p { margin: 0 0 10px; color: var(--ivory-muted); font-size: 0.63rem; letter-spacing: 0.08em; text-transform: uppercase; }
 .youtube-mood-player > p strong { color: var(--ivory); }
+.featured-artists { margin-top: 20px; }
+.featured-artists > p { margin: 0 0 10px; color: rgba(245, 241, 233, 0.76); font-size: .61rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+.featured-artists > div { display: flex; flex-wrap: wrap; gap: 8px; }
+.featured-artists a { min-height: 40px; padding: 10px 13px; display: inline-flex; align-items: center; border: 1px solid rgba(245, 241, 233, .35); background: rgba(5, 6, 7, .18); color: var(--ivory); font-size: .7rem; font-weight: 700; letter-spacing: .04em; }
+.featured-artists a:hover, .featured-artists a:focus-visible { background: var(--ivory); color: var(--ink); }
 
 .events-hero {
   width: var(--page);

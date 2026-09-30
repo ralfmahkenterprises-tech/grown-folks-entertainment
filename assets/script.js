@@ -16,6 +16,7 @@
       youtube: "PLI4ctGLsZfcY",
       youtubeEmbed: "https://www.youtube.com/embed/videoseries?list=PL508AB1A670943D2D",
       youtubeLabel: "Quiet Storm Slow Jams",
+      artists: ["Atlantic Starr", "Luther Vandross"],
     },
     {
       id: "sunday-soul",
@@ -31,6 +32,7 @@
       youtube: "PLTMn5T9QWFSU",
       youtubeEmbed: "https://www.youtube.com/embed/videoseries?list=PLiVkY3bldIErOJzCSVmapM5g16td7nSib",
       youtubeLabel: "Sunday Old-School Soul",
+      artists: ["Al Jarreau"],
     },
     {
       id: "two-step-gold",
@@ -46,6 +48,7 @@
       youtube: "PLBUJOqniMWJk",
       youtubeEmbed: "https://www.youtube.com/embed/2cVWmGn3GiI",
       youtubeLabel: "Slow 80s & 90s R&B Two-Step",
+      artists: ["Frankie Beverly & Maze"],
     },
     {
       id: "midnight-drive",
@@ -61,6 +64,7 @@
       youtube: "PLBwMUdvN5GpQ",
       youtubeEmbed: "https://www.youtube.com/embed/_PWfVfCNFFA",
       youtubeLabel: "Midnight Slow Jams",
+      artists: ["Erykah Badu"],
     },
   ];
 
@@ -120,6 +124,7 @@
     promise: document.querySelector("[data-mood-promise]"),
     youtube: document.querySelector("[data-youtube-player]"),
     youtubeLabel: document.querySelector("[data-youtube-label]"),
+    artists: document.querySelector("[data-mood-artists]"),
   };
 
   const replayMoodAnimation = () => {
@@ -165,6 +170,17 @@
       panelFields.youtube.title = `${mood.name}: ${mood.youtubeLabel} on YouTube Music`;
     }
     if (panelFields.youtubeLabel) panelFields.youtubeLabel.textContent = mood.youtubeLabel;
+    if (panelFields.artists) {
+      panelFields.artists.replaceChildren(...mood.artists.map((artist) => {
+        const link = document.createElement("a");
+        link.href = `https://music.youtube.com/search?q=${encodeURIComponent(`${artist} songs`)}`;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.textContent = artist;
+        link.setAttribute("aria-label", `Explore all ${artist} songs on YouTube Music`);
+        return link;
+      }));
+    }
     if (moodRecord) moodRecord.dataset.playing = String(shouldAutoplay);
     if (recordState) recordState.textContent = shouldAutoplay ? "Playing" : "Play";
     replayMoodAnimation();
